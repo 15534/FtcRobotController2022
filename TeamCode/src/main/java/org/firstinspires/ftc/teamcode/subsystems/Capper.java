@@ -7,10 +7,14 @@ import static org.firstinspires.ftc.teamcode.Constants.*;
 
 @Config
 public class Capper {
-    Servo capperServo;
+    private Servo capperServo;
 
     public Capper(HardwareMap hardwareMap) {
         capperServo = hardwareMap.get(Servo.class, "capperServo");
+    }
+
+    public void init() {
+        capperServo.setPosition(capInit);
     }
 
     public void down(){

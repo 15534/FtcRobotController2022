@@ -13,12 +13,11 @@ import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
 @Config
 public class DriveTrain {
 
-    public DcMotorEx fleft, fright, bleft, bright;
-    public Servo fr, br, fl, bl;
+    private DcMotorEx fleft, fright, bleft, bright;
+    private Servo fr, br, fl, bl;
 
-    SampleMecanumDrive mecDrive;
-    SampleTankDrive tankDrive;
-
+    private SampleMecanumDrive mecDrive;
+    private SampleTankDrive tankDrive;
 
     public DriveTrain(HardwareMap hardwareMap) {
         // drive train servo init
@@ -39,6 +38,14 @@ public class DriveTrain {
 
         mecDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         tankDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    public SampleMecanumDrive getMecDrive() {
+        return mecDrive;
+    }
+
+    public SampleTankDrive getTankDrive() {
+        return tankDrive;
     }
 
     public void mecToTank() {
@@ -62,7 +69,7 @@ public class DriveTrain {
         bright.setPower(duckTension);
     }
 
-    public void driveTrainInit() {
+    public void init () {
         tankToMec();
     }
 }
