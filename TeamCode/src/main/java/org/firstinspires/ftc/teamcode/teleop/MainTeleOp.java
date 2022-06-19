@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.teleop;
 
 import static org.firstinspires.ftc.teamcode.Constants.*;
 
+
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
@@ -23,159 +24,162 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
 import org.firstinspires.ftc.teamcode.subsystems.*;
 
+
 @TeleOp(name = "TeleOp")
 @Config
 public class MainTeleOp extends LinearOpMode {
     DriveTrain driveTrain = new DriveTrain(hardwareMap);
+    Capper capper = new Capper(hardwareMap);
+    Outtake outtake = new Outtake(hardwareMap);
+    Intake intake = new Intake(hardwareMap);
+    Carousel carousel = new Carousel(hardwareMap);
 
 
-    // defining motors and servos
-    DcMotorEx intakeSurgical, intakeExtension, outtake, motorExLeft, carousel,
-            fleft, fright, bleft, bright;
-    Servo intakePosition, outtakeServo, fr, br, fl, bl, capperServo;
-
-    // intake constants
-    double mecDown = 0.095;
-    double intakeUp = 0.57;
-    double tankDown = 0.140;
-
-    // outtake constants
-    double outtakeDelay = 0.2;
-    public static int outtakeThirdLevelPosition = -360;
-    public static int outtakeFirstLevelPosition = -120;
-    public static int outtakeDownPosition = 0;
-    public static double outtakePower = 0.5;
-
-    // public static double outtakeServoClosePosition = 0.2;
-    // public static double outtakeServoOpenPosition = 0.7;
-
-    public static int intakeExtensionLowerLimit, intakeExtensionUpperLimit;
-    //public static = 270;
-    //public static double intakePower = 0.6;
-
-    public static double leftStickPos = 1;
-
-    public static double DPAD_SPEED = 0.18;
-    public static double BUMPER_ROTATION_SPEED = .7;
-    public static double ROTATION_MULTIPLIER = .7;
-
-    public static double TICKS_PER_REV = 537.6;
+//    // defining motors and servos
+//    DcMotorEx intakeSurgical, intakeExtension, outtake, motorExLeft, carousel,
+//            fleft, fright, bleft, bright;
+//    Servo intakePosition, outtakeServo, fr, br, fl, bl, capperServo;
+//
+//    // intake constants
+//    double mecDown = 0.095;
+//    double intakeUp = 0.57;
+//    double tankDown = 0.140;
+//
+//    // outtake constants
+//    double outtakeDelay = 0.2;
+//    public static int outtakeThirdLevelPosition = -360;
+//    public static int outtakeFirstLevelPosition = -120;
+//    public static int outtakeDownPosition = 0;
+//    public static double outtakePower = 0.5;
+//
+//    // public static double outtakeServoClosePosition = 0.2;
+//    // public static double outtakeServoOpenPosition = 0.7;
+//
+//    public static int intakeExtensionLowerLimit, intakeExtensionUpperLimit;
+//    //public static = 270;
+//    //public static double intakePower = 0.6;
+//
+//    public static double leftStickPos = 1;
+//
+//    public static double DPAD_SPEED = 0.18;
+//    public static double BUMPER_ROTATION_SPEED = .7;
+//    public static double ROTATION_MULTIPLIER = .7;
+//
+//    public static double TICKS_PER_REV = 537.6;
 
     public static boolean isMec = true;
     ElapsedTime runtime = new ElapsedTime();
-    public double timer = -1;
+//    public double timer = -1;
+
     @Override
     public void runOpMode() throws InterruptedException {
-        double lastvaluefront = -1;
-        double lastvaluelast = -1;
-        int startpoint = 0;
-        double power = 0.0;
-        double scale = 0.0;
-        double lastX = runtime.seconds();
-        double lastB = runtime.seconds();
+//        double lastvaluefront = -1;
+//        double lastvaluelast = -1;
+//        int startpoint = 0;
+//        double power = 0.0;
+//        double scale = 0.0;
+//        double lastX = runtime.seconds();
+//        double lastB = runtime.seconds();
+//
+//        boolean extended = false;
+//
+//        SampleMecanumDrive mecDrive = new SampleMecanumDrive(hardwareMap);
+//        mecDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//
+//        SampleTankDrive tankDrive = new SampleTankDrive(hardwareMap);
+//        tankDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//
+//        // defining gamepads
+//        GamepadEx gp1 = new GamepadEx(gamepad1);
+//        GamepadEx gp2 = new GamepadEx(gamepad2);
+//
+//        ButtonReader redCarousel = new ButtonReader(gp2, GamepadKeys.Button.B);
+//        ButtonReader blueCarousel = new ButtonReader(gp2, GamepadKeys.Button.X);
+//
+//        ButtonReader capperDown = new ButtonReader(gp2, GamepadKeys.Button.A);
+//        ButtonReader capperUp = new ButtonReader(gp2, GamepadKeys.Button.Y);
+//
+//        fl = hardwareMap.get(Servo.class, "frontleft"); // lower: 0.984, upper: 0
+//        fr = hardwareMap.get(Servo.class, "frontright"); // lower: .1, upper: 1
+//        br = hardwareMap.get(Servo.class, "backright"); // lower: 0.954, upper: 0
+//        bl = hardwareMap.get(Servo.class, "backleft"); // lower: 0.02, upper: 1
+//
+//        capperServo = hardwareMap.get(Servo.class, "capperServo"); // registered in driver station
+//
+//        // drivetrain motor init
+//        fleft = hardwareMap.get(DcMotorEx.class, "front_left");
+//        fright = hardwareMap.get(DcMotorEx.class, "front_right");
+//        bleft = hardwareMap.get(DcMotorEx.class, "rear_left");
+//        bright = hardwareMap.get(DcMotorEx.class, "rear_right");
+//
+//        motorExLeft = (DcMotorEx)hardwareMap.get(DcMotor.class, "intake");
+//        outtakeServo = hardwareMap.get(Servo.class, "outtake servo");
+//        outtakeServo.setDirection(Servo.Direction.FORWARD);
+//
+//        intakeSurgical = hardwareMap.get(DcMotorEx.class, "intakeSurgical");
+//        intakeSurgical.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+//        intakeSurgical.setDirection(DcMotor.Direction.FORWARD);
+//        intakeSurgical.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//
+//        carousel = hardwareMap.get(DcMotorEx.class,"caro");
+//
+//        outtake = hardwareMap.get(DcMotorEx.class, "intake");
+//        outtake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+//        outtake.setDirection(DcMotor.Direction.REVERSE);
+//        outtake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//
+//        intakeExtension = hardwareMap.get(DcMotorEx.class, "intakeExtension");
+//        intakeExtension.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+//        intakeExtension.setDirection(DcMotor.Direction.REVERSE);
+//        intakeExtension.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//
+//        //PIDCoefficients coeffs = new PIDCoefficients(kP, kI, kD);
+//        //PIDFController controller = new PIDFController(coeffs, 0, 0, 0, (x, v) -> kG);
+//
+//        intakePosition = hardwareMap.get(Servo.class, "intakeLift");
+//
+//        FtcDashboard dashboard = FtcDashboard.getInstance();
+//        telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
+//
+//        // init robot
+//        intakeExtension.setTargetPosition(-60);
+//        intakeExtension.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        intakeExtension.setPower(-0.5);
+//
+//        intakeExtensionLowerLimit = intakeExtension.getCurrentPosition();
+//        intakeExtensionUpperLimit = intakeExtensionLowerLimit + 270;
+//
+//        intakePosition.setPosition(intakeUp);
+//        motorExLeft.setTargetPosition(outtakeDownPosition);
+//        outtakeServo.setPosition(outtakeServoLowerLimit);
 
-        boolean extended = false;
+//        double scaler = 0.6;
 
-        SampleMecanumDrive mecDrive = new SampleMecanumDrive(hardwareMap);
-        mecDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        driveTrain.init();
+        capper.init();
+        intake.init();
 
-        SampleTankDrive tankDrive = new SampleTankDrive(hardwareMap);
-        tankDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        // defining gamepads
-        GamepadEx gp1 = new GamepadEx(gamepad1);
-        GamepadEx gp2 = new GamepadEx(gamepad2);
-
-        ButtonReader redCarousel = new ButtonReader(gp2, GamepadKeys.Button.B);
-        ButtonReader blueCarousel = new ButtonReader(gp2, GamepadKeys.Button.X);
-
-        ButtonReader capperDown = new ButtonReader(gp2, GamepadKeys.Button.A);
-        ButtonReader capperUp = new ButtonReader(gp2, GamepadKeys.Button.Y);
-
-        fl = hardwareMap.get(Servo.class, "frontleft"); // lower: 0.984, upper: 0
-        fr = hardwareMap.get(Servo.class, "frontright"); // lower: .1, upper: 1
-        br = hardwareMap.get(Servo.class, "backright"); // lower: 0.954, upper: 0
-        bl = hardwareMap.get(Servo.class, "backleft"); // lower: 0.02, upper: 1
-
-        capperServo = hardwareMap.get(Servo.class, "capperServo"); // registered in driver station
-
-        // drivetrain motor init
-        fleft = hardwareMap.get(DcMotorEx.class, "front_left");
-        fright = hardwareMap.get(DcMotorEx.class, "front_right");
-        bleft = hardwareMap.get(DcMotorEx.class, "rear_left");
-        bright = hardwareMap.get(DcMotorEx.class, "rear_right");
-
-        motorExLeft = (DcMotorEx)hardwareMap.get(DcMotor.class, "intake");
-        outtakeServo = hardwareMap.get(Servo.class, "outtake servo");
-        outtakeServo.setDirection(Servo.Direction.FORWARD);
-
-        intakeSurgical = hardwareMap.get(DcMotorEx.class, "intakeSurgical");
-        intakeSurgical.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        intakeSurgical.setDirection(DcMotor.Direction.FORWARD);
-        intakeSurgical.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        carousel = hardwareMap.get(DcMotorEx.class,"caro");
-
-        outtake = hardwareMap.get(DcMotorEx.class, "intake");
-        outtake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        outtake.setDirection(DcMotor.Direction.REVERSE);
-        outtake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        intakeExtension = hardwareMap.get(DcMotorEx.class, "intakeExtension");
-        intakeExtension.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        intakeExtension.setDirection(DcMotor.Direction.REVERSE);
-        intakeExtension.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        //PIDCoefficients coeffs = new PIDCoefficients(kP, kI, kD);
-        //PIDFController controller = new PIDFController(coeffs, 0, 0, 0, (x, v) -> kG);
-
-        intakePosition = hardwareMap.get(Servo.class, "intakeLift");
-
-        FtcDashboard dashboard = FtcDashboard.getInstance();
-        telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
-
-        // init robot
-        intakeExtension.setTargetPosition(-60);
-        intakeExtension.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        intakeExtension.setPower(-0.5);
-
-        intakeExtensionLowerLimit = intakeExtension.getCurrentPosition();
-        intakeExtensionUpperLimit = intakeExtensionLowerLimit + 270;
-
-        intakePosition.setPosition(intakeUp);
-        motorExLeft.setTargetPosition(outtakeDownPosition);
-        outtakeServo.setPosition(outtakeServoLowerLimit);
-
-        double scaler = 0.6;
-
-        fl.setPosition(flMec);
-        fr.setPosition(frMec);
-        br.setPosition(brMec);
-        bl.setPosition(blMec);
-
-        boolean a = true;
-        boolean b = true;
-        boolean x = true;
-        boolean y = true;
-        boolean pressed = true;
-
-        boolean toggleOff = false;
+//        boolean a = true;
+//        boolean b = true;
+//        boolean x = true;
+//        boolean y = true;
+//        boolean pressed = true;
+//
+//        boolean toggleOff = false;
 
         waitForStart();
-
-        capperServo.setPosition(capInit);
 
         while (!isStopRequested()) {
             double elapsed = runtime.seconds() - time;
 
-            mecDrive.update();
-            tankDrive.update();
+            driveTrain.getMecDrive().update();
+            driveTrain.getTankDrive().update();
 
             Pose2d poseEstimate;
             if (isMec) {
-                poseEstimate = mecDrive.getPoseEstimate();
+                poseEstimate = driveTrain.getMecDrive().getPoseEstimate();
             } else {
-                poseEstimate = tankDrive.getPoseEstimate();
+                poseEstimate = driveTrain.getTankDrive().getPoseEstimate();
             }
             PoseStorage.currentPose = poseEstimate;
 

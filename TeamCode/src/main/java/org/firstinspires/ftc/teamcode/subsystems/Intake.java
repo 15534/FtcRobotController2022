@@ -16,7 +16,7 @@ public class Intake {
     DcMotorEx intakeExtension, intakeSurgical;
     Servo intakePosition;
 
-    public static int intakeExtensionLowerLimit, intakeExtensionUpperLimit;
+    private int intakeExtensionLowerLimit, intakeExtensionUpperLimit;
 
     public Intake(HardwareMap hardwareMap) {
 
@@ -34,7 +34,7 @@ public class Intake {
 
     }
 
-    public void intakeInit() {
+    public void init() {
 
         intakeExtension.setTargetPosition(-60);
         intakeExtension.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -44,6 +44,14 @@ public class Intake {
         intakeExtensionUpperLimit = intakeExtensionLowerLimit + 270;
 
         intakePosition.setPosition(intakeUp);
+    }
+
+    public int getIntakeExtensionLowerLimit() {
+        return intakeExtensionLowerLimit;
+    }
+
+    public int getIntakeExtensionUpperLimit() {
+        return intakeExtensionUpperLimit;
     }
 
     public void intakeUp() {
