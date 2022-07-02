@@ -46,27 +46,27 @@ public class Intake {
         intakePosition.setPosition(intakeUp);
     }
 
-    public int getIntakeExtensionLowerLimit() {
+    public int getLowerLimit() {
         return intakeExtensionLowerLimit;
     }
 
-    public int getIntakeExtensionUpperLimit() {
+    public int getUpperLimit() {
         return intakeExtensionUpperLimit;
     }
 
-    public void intakeUp() {
+    public void up() {
         intakePosition.setPosition(intakeUp);
     }
 
-    public void intakeMecDown() {
+    public void mecDown() {
         intakePosition.setPosition(intakeMecDown);
     }
 
-    public void intakeTankDown() {
+    public void tankDown() {
         intakePosition.setPosition(intakeTankDown);
     }
 
-    public void intakeExtend(double joystickPosition) {
+    public void extend(double joystickPosition) {
 
         if (intakeExtension.getCurrentPosition() >= intakeExtensionLowerLimit) {
             intakeExtension.setTargetPosition((int) (intakeExtensionLowerLimit + joystickPosition * 270 * (-1)));
@@ -76,7 +76,7 @@ public class Intake {
 
     }
 
-    public void intakeRetract() {
+    public void retract() {
 
         intakeExtension.setTargetPosition(intakeExtensionLowerLimit);
         intakeExtension.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -84,7 +84,7 @@ public class Intake {
 
     }
 
-    public void intakeHoldIn() {
+    public void holdIn() {
 
         intakeExtension.setTargetPosition(intakeExtensionLowerLimit);
         intakeExtension.setMode(DcMotor.RunMode.RUN_TO_POSITION);
