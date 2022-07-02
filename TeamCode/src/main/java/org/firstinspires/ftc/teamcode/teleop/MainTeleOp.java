@@ -34,138 +34,15 @@ public class MainTeleOp extends LinearOpMode {
     Intake intake = new Intake(hardwareMap);
     Carousel carousel = new Carousel(hardwareMap);
 
-
-//    // defining motors and servos
-//    DcMotorEx intakeSurgical, intakeExtension, outtake, motorExLeft, carousel,
-//            fleft, fright, bleft, bright;
-//    Servo intakePosition, outtakeServo, fr, br, fl, bl, capperServo;
-//
-//    // intake constants
-//    double mecDown = 0.095;
-//    double intakeUp = 0.57;
-//    double tankDown = 0.140;
-//
-//    // outtake constants
-//    double outtakeDelay = 0.2;
-//    public static int outtakeThirdLevelPosition = -360;
-//    public static int outtakeFirstLevelPosition = -120;
-//    public static int outtakeDownPosition = 0;
-//    public static double outtakePower = 0.5;
-//
-//    // public static double outtakeServoClosePosition = 0.2;
-//    // public static double outtakeServoOpenPosition = 0.7;
-//
-//    public static int intakeExtensionLowerLimit, intakeExtensionUpperLimit;
-//    //public static = 270;
-//    //public static double intakePower = 0.6;
-//
-//    public static double leftStickPos = 1;
-//
-//    public static double DPAD_SPEED = 0.18;
-//    public static double BUMPER_ROTATION_SPEED = .7;
-//    public static double ROTATION_MULTIPLIER = .7;
-//
-//    public static double TICKS_PER_REV = 537.6;
-
     public static boolean isMec = true;
     ElapsedTime runtime = new ElapsedTime();
-//    public double timer = -1;
 
     @Override
     public void runOpMode() throws InterruptedException {
-//        double lastvaluefront = -1;
-//        double lastvaluelast = -1;
-//        int startpoint = 0;
-//        double power = 0.0;
-//        double scale = 0.0;
-//        double lastX = runtime.seconds();
-//        double lastB = runtime.seconds();
-//
-//        boolean extended = false;
-//
-//        SampleMecanumDrive mecDrive = new SampleMecanumDrive(hardwareMap);
-//        mecDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//
-//        SampleTankDrive tankDrive = new SampleTankDrive(hardwareMap);
-//        tankDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//
-//        // defining gamepads
-//        GamepadEx gp1 = new GamepadEx(gamepad1);
-//        GamepadEx gp2 = new GamepadEx(gamepad2);
-//
-//        ButtonReader redCarousel = new ButtonReader(gp2, GamepadKeys.Button.B);
-//        ButtonReader blueCarousel = new ButtonReader(gp2, GamepadKeys.Button.X);
-//
-//        ButtonReader capperDown = new ButtonReader(gp2, GamepadKeys.Button.A);
-//        ButtonReader capperUp = new ButtonReader(gp2, GamepadKeys.Button.Y);
-//
-//        fl = hardwareMap.get(Servo.class, "frontleft"); // lower: 0.984, upper: 0
-//        fr = hardwareMap.get(Servo.class, "frontright"); // lower: .1, upper: 1
-//        br = hardwareMap.get(Servo.class, "backright"); // lower: 0.954, upper: 0
-//        bl = hardwareMap.get(Servo.class, "backleft"); // lower: 0.02, upper: 1
-//
-//        capperServo = hardwareMap.get(Servo.class, "capperServo"); // registered in driver station
-//
-//        // drivetrain motor init
-//        fleft = hardwareMap.get(DcMotorEx.class, "front_left");
-//        fright = hardwareMap.get(DcMotorEx.class, "front_right");
-//        bleft = hardwareMap.get(DcMotorEx.class, "rear_left");
-//        bright = hardwareMap.get(DcMotorEx.class, "rear_right");
-//
-//        motorExLeft = (DcMotorEx)hardwareMap.get(DcMotor.class, "intake");
-//        outtakeServo = hardwareMap.get(Servo.class, "outtake servo");
-//        outtakeServo.setDirection(Servo.Direction.FORWARD);
-//
-//        intakeSurgical = hardwareMap.get(DcMotorEx.class, "intakeSurgical");
-//        intakeSurgical.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-//        intakeSurgical.setDirection(DcMotor.Direction.FORWARD);
-//        intakeSurgical.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//
-//        carousel = hardwareMap.get(DcMotorEx.class,"caro");
-//
-//        outtake = hardwareMap.get(DcMotorEx.class, "intake");
-//        outtake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-//        outtake.setDirection(DcMotor.Direction.REVERSE);
-//        outtake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//
-//        intakeExtension = hardwareMap.get(DcMotorEx.class, "intakeExtension");
-//        intakeExtension.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-//        intakeExtension.setDirection(DcMotor.Direction.REVERSE);
-//        intakeExtension.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//
-//        //PIDCoefficients coeffs = new PIDCoefficients(kP, kI, kD);
-//        //PIDFController controller = new PIDFController(coeffs, 0, 0, 0, (x, v) -> kG);
-//
-//        intakePosition = hardwareMap.get(Servo.class, "intakeLift");
-//
-//        FtcDashboard dashboard = FtcDashboard.getInstance();
-//        telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
-//
-//        // init robot
-//        intakeExtension.setTargetPosition(-60);
-//        intakeExtension.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        intakeExtension.setPower(-0.5);
-//
-//        intakeExtensionLowerLimit = intakeExtension.getCurrentPosition();
-//        intakeExtensionUpperLimit = intakeExtensionLowerLimit + 270;
-//
-//        intakePosition.setPosition(intakeUp);
-//        motorExLeft.setTargetPosition(outtakeDownPosition);
-//        outtakeServo.setPosition(outtakeServoLowerLimit);
-
-//        double scaler = 0.6;
 
         driveTrain.init();
         capper.init();
         intake.init();
-
-//        boolean a = true;
-//        boolean b = true;
-//        boolean x = true;
-//        boolean y = true;
-//        boolean pressed = true;
-//
-//        boolean toggleOff = false;
 
         waitForStart();
 
@@ -188,11 +65,6 @@ public class MainTeleOp extends LinearOpMode {
             telemetry.addData("heading", poseEstimate.getHeading());
             telemetry.addData("ie lower limit:", intakeExtensionLowerLimit);
             telemetry.addData("ie upper limit:", intakeExtensionUpperLimit);
-//            telemetry.addData("scaler", scaler);
-//            telemetry.addData("intake servo position: ", intakePosition.getPosition());
-//            telemetry.addData("outtakePosition: ", outtake.getCurrentPosition());
-            //telemetry.addData("upper limit: ", intakeExtensionUpperLimit);
-            //telemetry.addData("lower limit: ", intakeExtensionLowerLimit);
 
             redCarousel.readValue();
             blueCarousel.readValue();
@@ -222,7 +94,7 @@ public class MainTeleOp extends LinearOpMode {
                 if (translation.getX() != 0) {
                     translation = new Vector2d(translation.getX() * 1/2, 0);
                 } else {
-                     translation = new Vector2d(0, translation.getY() * 1/2);
+                    translation = new Vector2d(0, translation.getY() * 1/2);
                 }
             }
 
@@ -256,42 +128,26 @@ public class MainTeleOp extends LinearOpMode {
             if (gamepad2.a) {
                 // capper down
                 if (capperServo.getPosition() + capStep < capDown) {
-                    capperServo.setPosition(capperServo.getPosition() + capStep);
+                    capper.down();
                 }
             } else if (gamepad2.y) {
                 // capper up
                 if (capperServo.getPosition() - capStep > capInit) {
-                    capperServo.setPosition(capperServo.getPosition() - capStep);
+                    cap.up();
                 }
             }
 
             if (gamepad2.right_bumper) {
                 // cap servo pos increases slowly
                 if (capperServo.getPosition() + capStep < capDown) {
-                    capperServo.setPosition(capperServo.getPosition() + capStepSlow);
+                    capper.downSlow();
                 }
             } else if (gamepad2.left_bumper) {
                 // cap servo pos decreases slowly
                 if (capperServo.getPosition() - capStep > capInit) {
-                    capperServo.setPosition(capperServo.getPosition() - capStepSlow);
+                    capper.upSlow();
                 }
             }
-
-            // carousel
-//            if (gamepad2.x) {
-//                if (carousel.getCurrentPosition() <= TICKS_PER_REV * 2 / 3 * 6) {
-//                    carousel.setPower(0.6);
-//                } else {
-//                    carousel.setPower(1);
-//                }
-//            }
-//            if (gamepad2.b) {
-//                if (carousel.getCurrentPosition() <= -(TICKS_PER_REV * 2 / 3 * 6)) {
-//                    carousel.setPower(-0.6);
-//                } else {
-//                    carousel.setPower(-1);
-//                }
-//            }
 
             boolean noCarousel = true;
             if (gamepad2.x || gamepad2.b) {
@@ -300,42 +156,25 @@ public class MainTeleOp extends LinearOpMode {
 
             if (gamepad2.x) {
                 noCarousel = false;
-                if (runtime.seconds() - lastX < 1.25) {
-                    carousel.setPower(1);
-                } else {
-                    carousel.setPower(0.5);
-                }
+                carousel.SpinX(runtime, lastX);
             } else {
                 lastX = runtime.seconds();
             }
 
             if (gamepad2.b) {
                 noCarousel = false;
-                if (runtime.seconds() - lastB < 1.25) {
-                    carousel.setPower(-0.5);
-                } else {
-                    carousel.setPower(-1);
-                }
+                carousel.SpinB(runtime, lastX);
             } else {
                 lastB = runtime.seconds();
             }
 
-            if (noCarousel) carousel.setPower(0);
+            if (noCarousel) { carousel.getCarouselSpinner().setPosition(0); }
 
             //telemetry.addData("red carousel down: ", redCarousel.isDown());
 
             // surgical tubing
-            if (gamepad2.right_trigger < 0.5 && gamepad2.left_trigger < 0.5) {
-                intakeSurgical.setPower(0);
-            }
-
-            if (gamepad2.right_trigger > 0.5) {
-                intakeSurgical.setPower(gamepad2.right_trigger);
-            }
-
-            if (gamepad2.left_trigger > 0.5) {
-                intakeSurgical.setPower(-1 * gamepad2.left_trigger);
-            }
+            double intakeSurgicalPower = intake.intakeSurgicalPower(gamepad2.right_trigger, gamepad2.left_trigger);
+            intake.getIntakeSurgical.setPower(intakeSurgicalPower);
 
             //telemetry.addData("gamepad stick position: ", gamepad2.right_stick_y);
             //telemetry.update();
@@ -343,100 +182,51 @@ public class MainTeleOp extends LinearOpMode {
             // intake servo
             //range for stick is -1 at top and 1 at bottom
             // intake comes down
-            if (gamepad2.right_stick_y > 0.1) {
-                intakePosition.setPosition(intakeUp); // tank mode down
-            }
-
-            if (gamepad2.right_stick_y < -0.1) {
-                if(isMec) {
-                    intakePosition.setPosition(mecDown);
-                }else{
-                    intakePosition.setPosition(tankDown);// general servo up position
-                }
-            }
-
-            //double function = 0.1;
-            //if(pos>0){
-            //  pos+=intakeExtension.getPower()*20;
-            //function = Math.max(4.9*Math.sqrt(pos/300.0)*Math.exp(-1.0*pos/50.0),0.1);
-            //}
-
+            double intakePositionValue = intake.intakePosition(gamepad2.right_stick_y, isMec);
+            intakePosition.setPosition(intakePositionValue);
 
             // intake extension motor
             if (gamepad2.left_stick_y < -0.02) {
                 double joystickPosition = gamepad2.left_stick_y;
-//                telemetry.addData("curr pos: ", intakeExtension.getCurrentPosition());
-//                telemetry.addData("statement: ", intakeExtension.getCurrentPosition() > intakeExtensionLowerLimit);
-
-                if (intakeExtension.getCurrentPosition() >= intakeExtensionLowerLimit) {
-                    //telemetry.addData("pos to move: ", (intakeExtensionLowerLimit + joystickPosition * 270 * (-1)));
-//                    telemetry.addData("statement: ", gamepad2.left_stick_y < -0.1);
-//                    telemetry.addData("pos: ", (int) (joystickPosition * 270 * (-1)));
-//
-                    //telemetry.addData("test", 0);
-                    intakeExtension.setTargetPosition((int) (intakeExtensionLowerLimit + joystickPosition * 270 * (-1)));
-                    intakeExtension.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    intakeExtension.setPower(0.7);
-                }
-                //extended = true;
+                intake.extend(joystickPosition);
             }
 
             if (gamepad2.left_stick_y >= 0) { // what code makes left_stick_y > 0.02 go in then?
-                intakeExtension.setTargetPosition(intakeExtensionLowerLimit);
-                intakeExtension.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                intakeExtension.setPower(-0.5);
-                //extended = false;
+                intake.retract();
             }
 
             if (intakeExtension.getCurrentPosition() >= intakeExtensionLowerLimit && intakeExtension.getCurrentPosition() <= intakeExtensionLowerLimit + 20) {
                 if (gamepad2.left_stick_y > -0.02 && gamepad2.left_stick_y < 0.02) {
-                    //telemetry.addLine("pulling back");
-                    intakeExtension.setTargetPosition(intakeExtensionLowerLimit);
-                    intakeExtension.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    intakeExtension.setPower(-0.001);
+                    intake.holdIn();
                 }
             }
-
-            //telemetry.addData("joystick: ", gamepad2.left_stick_y);
-            //telemetry.addData("intake extension pos: ", intakeExtension.getCurrentPosition());
-//          telemetry.addData("extended: ", extended);
 
             // outtake
 
             if (gamepad2.dpad_up) {
-                motorExLeft.setTargetPosition(outtakeThirdLevelPosition);
-                motorExLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                motorExLeft.setPower(outtakePower);
+                int outtakeLevel = 3;
+                outtake.outtakeRaise(outtakeLevel);
             }
 
             if (gamepad2.dpad_left) {
-                motorExLeft.setTargetPosition(outtakeFirstLevelPosition);
-                motorExLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                motorExLeft.setPower(outtakePower);
+                int outtakeLevel = 1;
+                outtake.outtakeRaise(outtakeLevel);
             }
 
             if (gamepad2.dpad_right) {
-//                if(intakeExtension.getCurrentPosition()-intakeExtensionLowerLimit<100){
-//                    intakeExtension.setPower(0.2);
-//                }
-
-                outtakeServo.setPosition(outtakeServoLimitUpperMidHub);
+                int outtakeLevel = 2; // can also be 3
+                outtake.outtakeRelease(outtakeLevel);
             }
 
             if (gamepad2.dpad_down) {
-                motorExLeft.setTargetPosition(outtakeDownPosition);
-                motorExLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                motorExLeft.setPower(outtakePower*0.6);
-
-                outtakeServo.setPosition(outtakeServoLowerLimit);
+                outtake.outtakeDown();
             }
-            //telemetry.addData("intake Position: ", intakePosition.getPosition());
 
-            if(gamepad1.right_trigger>0.6&&pressed){
-                if(isMec){
+            if(gamepad1.right_trigger>0.6 && pressed){
+                if (isMec) {
                     // switcing from mec to tank
-                    if(intakePosition.getPosition() > mecDown - 0.01 && intakePosition.getPosition() < mecDown + 0.01){
-                        intakePosition.setPosition(tankDown);
+                    if (intakePosition.getPosition() > mecDown - 0.01 && intakePosition.getPosition() < mecDown + 0.01) {
+                        intake.tankDown();
                     }
                     driveTrain.mecToTank();
 
@@ -450,7 +240,7 @@ public class MainTeleOp extends LinearOpMode {
                     sleep(200); // delay 200 milliseconds so no intake slamming upon switch
 
                     if(intakePosition.getPosition() > tankDown - 0.01 && intakePosition.getPosition() < tankDown + 0.01){
-                        intakePosition.setPosition(mecDown);
+                        intake.mecDown();
                     }
 
                     isMec=true;
@@ -458,6 +248,7 @@ public class MainTeleOp extends LinearOpMode {
                 }
                 pressed=false;
             }
+
             if(gamepad1.right_trigger<0.6){
                 pressed=true;
             }
@@ -495,21 +286,6 @@ public class MainTeleOp extends LinearOpMode {
             telemetry.update();
 
         }
-
-        // dpad left - tier 1
-        // dpad right - open outtake servo that contains freight
-        // dpad down - return to position 0 and close outtake servo as well
-
-//
-//            if (gamepad2.left_stick_y > 0.0) {
-//                if (intakeExtension.getCurrentPosition() < intakeExtensionUpperLimit
-//                    && intakeExtension.getCurrentPosition() > intakeExtensionLowerLimit) {
-//                    intakeExtension.setPower(gamepad2.left_stick_y);
-//                }
-//            }
-
-        //telemetry.addData("power: ", power);
-        //telemetry.addData("scale", scale);
 
     }
 }
